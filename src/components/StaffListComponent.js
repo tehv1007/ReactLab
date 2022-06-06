@@ -16,7 +16,7 @@ class StaffList extends Component {
             selectedStaff: staff
         })
     }
-
+    
     render() {
         const staffList = this.props.staffs.map(staff => {
             return(
@@ -25,7 +25,6 @@ class StaffList extends Component {
                         <img className="card-img-top" src={staff.image} style={{width:"100%"}} alt={staff.name} />
                         <div className="card-body">
                             <h5 className="card-title">{staff.name}</h5>
-                            
                         </div>
                     </div>
                 </div>

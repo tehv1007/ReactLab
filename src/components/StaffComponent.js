@@ -25,12 +25,12 @@ class StaffInfo extends Component {
 
                         <div className="col-md-8">
                             <div className="card-body">
-                                <p className="card-text">Mã nhân viên : FSOFT-00{staff.id}</p>
+                                <p className="card-text">Mã nhân viên : EC-00{staff.id}</p>
                                 <p className="card-text">Ngày sinh : {dateFormat(staff.doB, "dd/mm/yyyy")}</p>
                                 <p className="card-text">Ngày vào công ty : {dateFormat(staff.startDate, "dd/mm/yyyy")}</p>
                                 <p className="card-text"> Phòng ban : {staff.department.name} </p>
                                 <p className="card-text"> Số ngày nghỉ còn lại : {staff.annualLeave}</p>
-                                <p className="card-text"> Số ngày làm thêm : {staff.overTime}</p>                               
+                                <p className="card-text"> Số ngày làm thêm : {staff.overTime}</p>                           
                             </div>
                         </div>
 

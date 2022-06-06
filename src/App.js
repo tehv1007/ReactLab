@@ -22,7 +22,7 @@ class App extends Component {
         </div>
       
         <div className="d-flex justify-content-around flex-wrap"> 
-          <StaffList staffs = {this.state.staffs} />
+          <StaffList staffs = {this.state.staffs}/>
         </div>
 
       </div>
