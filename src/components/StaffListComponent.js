@@ -18,7 +18,6 @@ class StaffList extends Component {
     }
 
     render() {
-        
         const staffList = this.props.staffs.map(staff => {
             return(
                 <div key={staff.id} className="col-md-4 col-sm-6 col-xs-12 text-center">
@@ -36,7 +35,7 @@ class StaffList extends Component {
         return(
             <div className="container">
 
-                <div className="row col" style={{color:'blue',margin:'15px'}}>
+                <div className="row col" style={{color:'blue',margin:'10px 0'}}>
                     <h5>Bấm vào tên nhân viên để xem thông tin </h5>
                 </div>
                 

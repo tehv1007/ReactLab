@@ -10,6 +10,7 @@ class StaffInfo extends Component {
         }
     }
 
+    // Using Boostrap Cards to render staff info
     renderStaff(staff) {
         if(staff != null) {
             return(
@@ -29,17 +30,12 @@ class StaffInfo extends Component {
                                 <p className="card-text">Ngày vào công ty : {dateFormat(staff.startDate, "dd/mm/yyyy")}</p>
                                 <p className="card-text"> Phòng ban : {staff.department.name} </p>
                                 <p className="card-text"> Số ngày nghỉ còn lại : {staff.annualLeave}</p>
-                                <p className="card-text"> Số ngày làm thêm : {staff.overTime}</p>
-                                
+                                <p className="card-text"> Số ngày làm thêm : {staff.overTime}</p>                               
                             </div>
                         </div>
 
                     </div>
-
-                </div>
-                
-
-                
+                </div>            
             );
         } else {
             return(
@@ -49,7 +45,6 @@ class StaffInfo extends Component {
     }
 
     render() {
-
         const staff = this.props.staff; // get data from parent component "StaffList"
         console.log(staff);
 
