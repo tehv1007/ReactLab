@@ -3,7 +3,7 @@ import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
 
 function RenderMenuItem ({dish, onDishSelect}) {
     return (
-        <Card onClick={() => onDishSelect(dish.id)}>
+        <Card>
             <CardImg src={dish.image} alt={dish.name}/>
             <CardImgOverlay>
                 <CardTitle>{dish.name}</CardTitle>
