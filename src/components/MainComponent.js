@@ -21,9 +21,6 @@ class Main extends Component {
             leaders: LEADERS,
         }
     }
-    onDishSelect(dishId) {
-        this.setState({ selectedDish: dishId });
-    }
     render() {
         const HomePage = () => {
             return (
@@ -34,13 +31,23 @@ class Main extends Component {
                     />
                 </div>
             )
+        };
+
+        const DishWithId = ({match}) => {
+            return (
+                <Dishdetail dish={this.state.dishes.find((dish) =>dish.id === parseInt(match.params.dishId, 10))}
+                            comments={this.state.comments.filter((comment) =>comment.dishId === parseInt(match.params.dishId, 10))}
+                />
+            )
         }
+
         return (
             <div className="container">
                 <Header/>
                 <Switch>
                     <Route path="/home" component={HomePage}/>
                     <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes}/>} />
+                    <Route path="/menu/:dishId" component={DishWithId}/>
                     <Route exact path="/contactus" component={() => <Contact/>}/>
                     <Redirect to="/home"/>
                 </Switch>
