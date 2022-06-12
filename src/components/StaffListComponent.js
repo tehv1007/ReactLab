@@ -20,7 +20,7 @@ class StaffList extends Component {
     render() {
         const staffList = this.props.staffs.map(staff => {
             return(
-                <div key={staff.id} className="col-md-4 col-sm-6 col-xs-12 text-center">
+                <div key={staff.id} className="col-md-2 col-sm-4 col-xs-12 text-center">
                     <div className="card" onClick={() => this.onStaffSelect(staff)} style={{cursor:"pointer", margin:"5px"}}>
                         <img className="card-img-top" src={staff.image} style={{width:"100%"}} alt={staff.name} />
                         <div className="card-body">

@@ -14,7 +14,7 @@ class StaffInfo extends Component {
     renderStaff(staff) {
         if(staff != null) {
             return(
-                <div className="card" cursor="pointer" style={{margin: "20px"}}>
+                <div className="card" cursor="pointer" style={{margin: "10px"}}>
                     <div className="row g-0 mt-3" style={{padding: "15px"}}>
 
                         <div className="col-md-4">
