@@ -4,6 +4,7 @@ import StaffList from './components/StaffListComponent';
 import { STAFFS } from './shared/staffs';
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +15,7 @@ class App extends Component {
   //Using Boostrap Responsive Flex for showing staffs list
   render() {
     return(
+      
       <div className="App">
         <div className="navbar navbar-dark bg-primary">
           <div className="container-fluid">

@@ -45,7 +45,7 @@ class StaffInfo extends Component {
     }
 
     render() {
-        const staff = this.props.staff; // get data from parent component "StaffList"
+        const staff = this.props.staff;
         console.log(staff);
 
         if(staff == null) {
