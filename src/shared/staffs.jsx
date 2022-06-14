@@ -1,3 +1,9 @@
+export const IMAGE = {
+    id: 0,
+    img: '/assets/images/background.jpg',
+    name: "background"
+}
+
 export const DEPARTMENTS =
     [
         {
