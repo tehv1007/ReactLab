@@ -1,54 +1,84 @@
-import { Component } from 'react';
-import StaffInfo from './StaffComponent';
+import { useState } from 'react';
+import {Link} from 'react-router-dom';
+import {Card, CardBody, CardTitle, CardImg, InputGroup, FormGroup, Input} from 'reactstrap';
 
-class StaffList extends Component {
+//Hiển thị hình ảnh và họ tên nhân viên
+function RenderStaff ({item}) {
+    return(
+        <Card id={item.id} className='Dept01'>
+            <Link to={`/staffs/${item.id}`}>
+                <CardBody>
+                    <CardImg src={item.image} alt={item.name} />
+                    <CardTitle className='nameTitle text-center'>
+                        {item.name}
+                    </CardTitle>
+                </CardBody>
+            </Link>
+        </Card>
+    )
+}
 
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            selectedStaff : null,
-        };
-    }
+//Hiển thị danh sách nhân viên và tìm kiếm, lựa chọn
+function StaffList(props) {
+    const [filterText, setFilterText] = useState('');
+    const [sort, setSort] = useState('all');
 
-    onStaffSelect(staff) {
-        this.setState({
-            selectedStaff: staff
-        })
-    }
-    
-    render() {
-        const staffList = this.props.staffs.map(staff => {
-            return(
-                <div key={staff.id} className="col-md-2 col-sm-4 col-xs-12 text-center">
-                    <div className="card" onClick={() => this.onStaffSelect(staff)} style={{cursor:"pointer", margin:"5px"}}>
-                        <img className="card-img-top" src={staff.image} style={{width:"100%"}} alt={staff.name} />
-                        <div className="card-body">
-                            <h5 className="card-title">{staff.name}</h5>
-                        </div>
-                    </div>
-                </div>
-            )
-        });
+    const handleFilterText= (e) => {
+        setFilterText(e.target.value);
+    };
 
-        return(
-            <div className="container">
+    const handleSortChange = (e) => {
+        setSort(e.target.value);
+    };
 
-                <div className="row col" style={{color:'blue',margin:'10px 0'}}>
-                    <h5>Bấm vào tên nhân viên để xem thông tin </h5>
-                </div>
+    const filtered = !filterText ? props.staffs : props.staffs.filter((staff) => 
+        staff.name.toLowerCase().includes(filterText.toLowerCase())
+    );
+
+    const sorted = sort === 'all' ? filtered
+                : sort === 'manager' ? filtered.filter((e) => e.salarySacle > 1)
+                : filtered.filter((e) => e.salarySacle === 1);
                 
-                <StaffInfo staff={this.state.selectedStaff}/>
-
-                <div className="row">
-                    {staffList}
-                </div>
-                
+    const stafflist = sorted.map((staff) => {
+        return (
+            <div key={staff.id} className ="col-6 col-md-4 col-lg-2 staff">
+                <RenderStaff item={staff} />
             </div>
         )
-    
-    }
+    });
 
+    return (
+        <div className='container'>
+            <div className='row'>
+                <div className='col-12 col-lg-4'>
+                    <h3>Danh sách nhân viên</h3>
+                </div>
+                <div className='col-12 col-lg-4 mr-auto'>
+                    <InputGroup>
+                        <Input className='mb-2'
+                            type="text"
+                            placeholder="Search..."
+                            onChange={handleFilterText} />
+                    </InputGroup>
+                </div>
+                <div className='col-12 col-lg-4'>
+                    <FormGroup>
+                        <Input className='inputSelect'
+                            type='select'
+                            onChange={handleSortChange}>
+                            <option value='all'>Tất cả</option>
+                            <option value='manager'>Quản lý</option>
+                            <option value='staff'>Nhân viên</option>
+                        </Input>
+                    </FormGroup>
+                </div>                
+            </div>
+            <hr />
+            <div className='row'>
+                {stafflist}
+            </div>
+        </div>
+    )
 }
 
 export default StaffList;

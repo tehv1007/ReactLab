@@ -1,5 +1,7 @@
 import { Component } from "react";
 import dateFormat from "dateformat";
+import {Link} from 'react-router-dom';
+import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 
 class StaffInfo extends Component {
 
@@ -55,11 +57,26 @@ class StaffInfo extends Component {
         const staffItem = this.renderStaff(staff);
 
         return(
-            <div className="row">
-                {staffItem}
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to='/staffs'>Nhân viên</Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
+                <hr/>  
+                <div className="row">
+                    <div className="col-12 ">
+                        <h3>Thông tin nhân viên</h3>
+                    </div>
+                </div> 
+                <div className="row">
+                    {staffItem}
+                </div>
             </div>
-        )
-    
+        )    
     }
 }
 

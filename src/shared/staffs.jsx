@@ -1,7 +1,7 @@
 export const IMAGE = {
     id: 0,
-    img: '/assets/images/background.jpg',
-    name: "background"
+    img: '/assets/images/featured.jpg',
+    name: "featured image"
 }
 
 export const DEPARTMENTS =

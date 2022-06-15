@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardBody, CardTitle, CardText, CardImg} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-// Render ra từng phòng ban
+// Render từng phòng ban
 function DepartmentEl({item}) {
     let department = item.id === "Dept01" ? "dept01" :
     item.id === "Dept02" ? "dept02" :
