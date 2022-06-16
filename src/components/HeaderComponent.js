@@ -25,7 +25,7 @@ class Header extends Component {
                         <NavbarBrand className="mr-auto" href="/"><img src='assets/images/logo.jpg' height="40" width="auto" alt='HR management' /></NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
-                            <NavItem>
+                                <NavItem>
                                     <NavLink className='nav-link' to='/staffs'><span className='fa fa-users fa-lg'></span> Nhân viên</NavLink>
                                 </NavItem>
                                 <NavItem>

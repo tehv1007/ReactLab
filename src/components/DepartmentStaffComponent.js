@@ -23,7 +23,7 @@ function RenderDeptStaff({item}) {
 function DepartmentStaff(props) {
     const list = props.items.map((item) => {
         return (
-            <div key={item.id} className="col-6 col-md-4 col-lg-2 staff">
+            <div key={item.id} className="col-6 col-md-4 col-lg-2 staff-list">
                 <RenderDeptStaff item={item}/>
             </div>
         )
@@ -33,9 +33,7 @@ function DepartmentStaff(props) {
         <div className="container">
         <div className="row">
             <Breadcrumb>
-                <BreadcrumbItem>
-                <Link to='/departments'>Phòng ban</Link>
-                </BreadcrumbItem>
+                <BreadcrumbItem><Link to='/departments'>Phòng ban</Link></BreadcrumbItem>
                 <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
             </Breadcrumb>
         </div>

@@ -13,9 +13,9 @@ function DepartmentEl({item}) {
         <Link to={`/departments/${item.id}`}>
             <Card className={department}>
                 <CardBody>
-                    <CardImg src={item.image} alt={item.name} className='deptImg'/>
-                    <CardTitle>{item.name} Department</CardTitle>
+                    <CardTitle className="cardTitle">{item.name} Department</CardTitle>
                     <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
+                    <CardImg src={item.image} alt={item.name}/>
                 </CardBody>
             </Card>
         </Link>
@@ -26,7 +26,7 @@ function DepartmentEl({item}) {
 function DepartmentList(props) {
     const departmentList = props.departments.map((department) => {
         return (
-            <div key={department.id} className="col-12 col-md-6 col-lg-4 staff">
+            <div key={department.id} className="col-12 col-md-6 col-lg-4 staff-list">
                 <DepartmentEl item={department} />
             </div>
         )
@@ -34,9 +34,9 @@ function DepartmentList(props) {
 
     return (
         <div className="container">
-            <div className="row">
+            <div className="row deptEl">
                 <div className="col-12">
-                    <h2 className="text-center">Phòng Ban</h2>
+                    <h2 className="text-center">PHÒNG BAN</h2>
                     <hr/>
                 </div>
             </div>

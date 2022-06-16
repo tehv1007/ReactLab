@@ -5,7 +5,7 @@ import {Card, CardBody, CardTitle, CardImg, InputGroup, FormGroup, Input} from '
 //Hiển thị hình ảnh và họ tên nhân viên
 function RenderStaff ({item}) {
     return(
-        <Card id={item.id} className='Dept01'>
+        <Card id={item.id} className='staffEl'>
             <Link to={`/staffs/${item.id}`}>
                 <CardBody>
                     <CardImg src={item.image} alt={item.name} />
@@ -41,7 +41,7 @@ function StaffList(props) {
                 
     const stafflist = sorted.map((staff) => {
         return (
-            <div key={staff.id} className ="col-6 col-md-4 col-lg-2 staff">
+            <div key={staff.id} className ="col-6 col-md-4 col-lg-2 staff-list">
                 <RenderStaff item={staff} />
             </div>
         )
@@ -49,15 +49,15 @@ function StaffList(props) {
 
     return (
         <div className='container'>
-            <div className='row'>
+            <div className='row subnav'>
                 <div className='col-12 col-lg-4'>
                     <h3>Danh sách nhân viên</h3>
                 </div>
-                <div className='col-12 col-lg-4 mr-auto'>
+                <div className='col-12 col-lg-4'>
                     <InputGroup>
                         <Input className='mb-2'
                             type="text"
-                            placeholder="Search..."
+                            placeholder="Tìm theo tên nhân viên..."
                             onChange={handleFilterText} />
                     </InputGroup>
                 </div>
@@ -74,7 +74,7 @@ function StaffList(props) {
                 </div>                
             </div>
             <hr />
-            <div className='row'>
+            <div className='row staff-list'>
                 {stafflist}
             </div>
         </div>

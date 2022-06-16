@@ -1,6 +1,6 @@
 export const IMAGE = {
     id: 0,
-    img: '/assets/images/featured.jpg',
+    img: '/assets/images/featured.png',
     name: "featured image"
 }
 
@@ -9,27 +9,32 @@ export const DEPARTMENTS =
         {
             id: "Dept01",
             name: "Sale",
-            numberOfStaff: 3
+            numberOfStaff: 3,
+            image: '/assets/images/sale-department.jpg'
         },
         {
             id: "Dept02",
             name: "HR",
-            numberOfStaff: 2
+            numberOfStaff: 2,
+            image: '/assets/images/hr-department.jpg'
         },
         {
             id: "Dept03",
             name: "Marketing",
-            numberOfStaff: 2
+            numberOfStaff: 2,
+            image: '/assets/images/marketing-department.jpg'
         },
         {
             id: "Dept04",
             name: "IT",
-            numberOfStaff: 2
+            numberOfStaff: 2,
+            image: '/assets/images/it-department.jpg'
         },
         {
             id: "Dept05",
             name: "Finance",
-            numberOfStaff: 7
+            numberOfStaff: 7,
+            image: '/assets/images/finance-department.jpg'
         }
     ]
 export const ROLE = {

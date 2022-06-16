@@ -3,12 +3,15 @@ import Main from './components/MainComponent';
 import { BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
+    
   render() {
-    return (
+      return (
       <BrowserRouter>
-        <Main />
+        <div className="App">
+            <Main/>
+        </div>
       </BrowserRouter>
-    );
+      );
   }
 }
 

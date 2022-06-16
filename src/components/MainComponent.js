@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import StaffInfo from './StaffComponent';
 import StaffList from './StaffListComponent';
 import DepartmentList from './DepartmentComponent';
 import DepartmentStaff from './DepartmentStaffComponent';
 import Salary from './SalaryComponent';
-import Footer from './FooterComponent';
 import { STAFFS, DEPARTMENTS, IMAGE } from '../shared/staffs';   
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ class Main extends Component {
         super(props);      
         this.state = {           
             staffs: STAFFS,
-            departments: DEPARTMENTS  ,
+            departments: DEPARTMENTS,
             image: IMAGE  
         };
     }

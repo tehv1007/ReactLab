@@ -6,12 +6,12 @@ function RenderStaff ({item}) {
     let department = item.id === "Dept01" ? "dept01" :
     item.id === "Dept02" ? "dept02" :
     item.id === "Dept03" ? "dep03" :
-    item.id === "Dept04" ? "dep04" : "dept";
+    item.id === "Dept04" ? "dep04" : "dept05";
 
     return (
         <Card id={item.id}>
             <CardBody className={department}>
-                <CardTitle>Họ và tên: {item.name}</CardTitle>
+                <CardTitle className="cardTitle2">Họ và tên: {item.name}</CardTitle>
                 <hr/>
                 <div className='row'>
                     <div className='col-4'>
@@ -19,7 +19,7 @@ function RenderStaff ({item}) {
                     </div>
                     <div className='col-8'>
                         <CardText>Phòng ban: {item.department.name}</CardText>
-                        <CardText>Mã nhân viên: {item.id}</CardText>
+                        <CardText>Mã nhân viên: EC-00{item.id}</CardText>
                         <CardText>Hệ số lương: {item.salaryScale}</CardText>
                         <CardText>Số ngày làm thêm: {item.overTime}</CardText>
                         <InputGroup className={department}>
@@ -56,7 +56,7 @@ function Salary(props) {
 
     const rederList = staffEl.map((staff) => {
         return (
-            <div key={staff.id} className='col-12 col-md-6 col-lg-4 staff'>
+            <div key={staff.id} className='col-12 col-md-6 col-lg-4 staff-list'>
                 <RenderStaff item={staff} />
             </div>
         )
@@ -75,12 +75,12 @@ function Salary(props) {
             <hr/>
             <div className="row">
                 <div className="col-12 col-md-6 m-auto">
-                    <h3>Bảng lương</h3>
+                    <h3>BẢNG LƯƠNG</h3>
                 </div>
-                <div className="col-12 col-md-6 m-auto">
+                <div className="col-12 col-md-6 labelEl">
                     <FormGroup>
                         <Label>Sắp xếp theo</Label>
-                        <Input id="salarySelect"
+                        <Input
                             type="select"
                             onChange={handleSortChange} >
                             <option value="staffId">Mã nhân viên</option>

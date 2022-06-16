@@ -48,14 +48,12 @@ class StaffInfo extends Component {
 
     render() {
         const staff = this.props.staff;
+        const staffItem = this.renderStaff(staff);
         console.log(staff);
 
         if(staff == null) {
             return <div></div>
-        }
-
-        const staffItem = this.renderStaff(staff);
-
+        } else {
         return(
             <div className="container">
                 <div className="row">
@@ -76,7 +74,7 @@ class StaffInfo extends Component {
                     {staffItem}
                 </div>
             </div>
-        )    
+        )}    
     }
 }
 
