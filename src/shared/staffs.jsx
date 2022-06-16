@@ -9,12 +9,12 @@ export const DEPARTMENTS =
         {
             id: "Dept01",
             name: "Sale",
-            numberOfStaff: 1
+            numberOfStaff: 3
         },
         {
             id: "Dept02",
             name: "HR",
-            numberOfStaff: 3
+            numberOfStaff: 2
         },
         {
             id: "Dept03",
@@ -24,12 +24,12 @@ export const DEPARTMENTS =
         {
             id: "Dept04",
             name: "IT",
-            numberOfStaff: 1
+            numberOfStaff: 2
         },
         {
             id: "Dept05",
             name: "Finance",
-            numberOfStaff: 11
+            numberOfStaff: 7
         }
     ]
 export const ROLE = {
@@ -66,7 +66,7 @@ export const STAFFS =
             id: 2,
             name: "Trần Đình Long",
             doB: "2001-01-01T08:59:00.000Z",
-            salaryScale: 1,
+            salaryScale: 1.3,
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 4,
@@ -78,7 +78,7 @@ export const STAFFS =
             id: 3,
             name: "Vũ Thị Hiền",
             doB: "2002-01-01T08:59:00.000Z",
-            salaryScale: 1,
+            salaryScale: 1.2,
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[2],
             annualLeave: 6,
@@ -90,9 +90,9 @@ export const STAFFS =
             id: 4,
             name: "Phạm Thu Hương",
             doB: "1999-01-01T08:59:00.000Z",
-            salaryScale: 1,
+            salaryScale: 1.3,
             startDate: "2019-04-30T08:59:00.000Z",
-            department: DEPARTMENTS[2],
+            department: DEPARTMENTS[4],
             annualLeave: 8,
             overTime: 1,
             image: '/assets/images/staff5.jpg',
@@ -104,7 +104,7 @@ export const STAFFS =
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
-            department: DEPARTMENTS[4],
+            department: DEPARTMENTS[0],
             annualLeave: 9,
             overTime: 10,
             image: '/assets/images/staff6.jpg',
@@ -116,7 +116,7 @@ export const STAFFS =
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
-            department: DEPARTMENTS[4],
+            department: DEPARTMENTS[0],
             annualLeave: 9,
             overTime: 10,
             image: '/assets/images/staff7.jpg',
@@ -224,7 +224,7 @@ export const STAFFS =
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
-            department: DEPARTMENTS[4],
+            department: DEPARTMENTS[1],
             annualLeave: 9,
             overTime: 10,
             image: '/assets/images/staff16.jpg',

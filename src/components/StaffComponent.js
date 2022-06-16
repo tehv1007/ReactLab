@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import dateFormat from "dateformat";
 import {Link} from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';

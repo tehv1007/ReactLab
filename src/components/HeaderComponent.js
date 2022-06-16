@@ -19,11 +19,10 @@ class Header extends Component {
 
     render() {
         return(
-            <React.Fragment>
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/"><img src='assets/images/logo.jpg' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
+                        <NavbarBrand className="mr-auto" href="/"><img src='assets/images/logo.jpg' height="40" width="auto" alt='HR management' /></NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                             <NavItem>
@@ -39,7 +38,6 @@ class Header extends Component {
                         </Collapse>
                     </div>
                 </Navbar>
-            </React.Fragment>
         );
     }
 }

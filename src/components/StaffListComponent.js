@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import {Card, CardBody, CardTitle, CardImg, InputGroup, FormGroup, Input} from 'reactstrap';
 
@@ -36,8 +36,8 @@ function StaffList(props) {
     );
 
     const sorted = sort === 'all' ? filtered
-                : sort === 'manager' ? filtered.filter((e) => e.salarySacle > 1)
-                : filtered.filter((e) => e.salarySacle === 1);
+                : sort === 'manager' ? filtered.filter((e) => e.salaryScale > 1)
+                : filtered.filter((e) => e.salaryScale === 1);
                 
     const stafflist = sorted.map((staff) => {
         return (

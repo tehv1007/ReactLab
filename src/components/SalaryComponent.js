@@ -6,7 +6,7 @@ function RenderStaff ({item}) {
     let department = item.id === "Dept01" ? "dept01" :
     item.id === "Dept02" ? "dept02" :
     item.id === "Dept03" ? "dep03" :
-    item.id === "Dept04" ? "dep04" : "dept01";
+    item.id === "Dept04" ? "dep04" : "dept";
 
     return (
         <Card id={item.id}>
@@ -49,8 +49,8 @@ function Salary(props) {
 
     sortEl === "highToLow" ? staffEl.sort((a,b) => a.salary > b.salary ? -1 : 1)
     : sortEl === 'lowToHigh' ? staffEl.sort((a,b) => a.salary > b.salary ? 1 : -1)
-    : sortEl === 'nameAtoZ' ? staffEl.sort((a,b) => a.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1)
-    : sortEl === 'nameZtoA' ? staffEl.sort((a,b) => a.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1)
+    : sortEl === 'nameAtoZ' ? staffEl.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+    : sortEl === 'nameZtoA' ? staffEl.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1)
     : sortEl === 'department' ? staffEl.sort((a,b) => a.department.name > b.department.name ? 1 : -1)
     : staffEl.sort((a,b) => a.id > b.id? 1 : -1);
 
