@@ -2,6 +2,7 @@ import React, { Component }from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import {Jumbotron} from 'react-bootstrap';
+
 class Header extends Component {
     constructor(props){
         super(props);
@@ -46,7 +47,7 @@ class Header extends Component {
                     <div className="container">
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
-                                <h1>Ristorante con Fusion</h1>
+                                <h2>Ristorante Con Fusion</h2>
                                 <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
                             </div>
                         </div>
