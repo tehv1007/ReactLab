@@ -87,7 +87,9 @@ class Contact extends Component {
                                 <Col md={10}>
                                     <Input type='text' id='firstname' name='firstname'
                                     placeholder='First Name'
-                                    value={this.state.firstname}/>
+                                    value={this.state.firstname}
+                                    onChange={this.handleInputChange}
+                                    />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
