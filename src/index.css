@@ -64,6 +64,7 @@ address {
 .staff-list {
   display: grid;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 /* Style for Department Component */
@@ -81,9 +82,4 @@ address {
   font-size: large;
   color: darkgoldenrod;
   text-align: center;
-}
-
-.labelEl {
-  margin-top: 10px;
-  float: right;
 }

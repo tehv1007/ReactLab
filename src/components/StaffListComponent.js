@@ -18,7 +18,7 @@ function RenderStaff ({item}) {
     )
 }
 
-//Hiển thị danh sách nhân viên và tìm kiếm, lựa chọn
+//Hiển thị danh sách nhân viên và chức năng tìm kiếm, lọc theo thuộc tính
 function StaffList(props) {
     const [filterText, setFilterText] = useState('');
     const [sort, setSort] = useState('all');
@@ -57,7 +57,7 @@ function StaffList(props) {
                     <InputGroup>
                         <Input className='mb-2'
                             type="text"
-                            placeholder="Tìm theo tên nhân viên..."
+                            placeholder="Tìm kiếm nhân viên..."
                             onChange={handleFilterText} />
                     </InputGroup>
                 </div>

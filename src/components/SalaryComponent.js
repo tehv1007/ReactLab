@@ -73,11 +73,11 @@ function Salary(props) {
                 </Breadcrumb>
             </div>
             <hr/>
-            <div className="row">
-                <div className="col-12 col-md-6 m-auto">
+            <div className="row align-items-center">
+                <div className="col-12 col-md-6">
                     <h3>BẢNG LƯƠNG</h3>
                 </div>
-                <div className="col-12 col-md-6 labelEl">
+                <div className="col-12 col-md-3 offset-md-2 offset-lg-3">
                     <FormGroup>
                         <Label>Sắp xếp theo</Label>
                         <Input
