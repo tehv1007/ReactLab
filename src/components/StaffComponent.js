@@ -5,13 +5,6 @@ import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 
 class StaffInfo extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedStaffInfo: this.props.StaffInfo
-        }
-    }
-
     // Using Boostrap Cards to render staff info
     renderStaff(staff) {
         if(staff != null) {
