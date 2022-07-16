@@ -64,6 +64,10 @@ export const fetchDishes = () => (dispatch) => {
     .catch(error => dispatch(dishesFailed(error.message)));
 }
 
+export const dishesLoading = () => ({
+    type: ActionTypes.DISHES_LOADING
+})
+
 export const dishesFailed = (errmess) => ({
     type: ActionTypes.DISHES_FAILED,
     payload: errmess
