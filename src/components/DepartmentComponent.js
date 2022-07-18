@@ -3,19 +3,19 @@ import {Card, CardBody, CardTitle, CardText, CardImg} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 // Render từng phòng ban
-function DepartmentEl({item}) {
-    let department = item.id === "Dept01" ? "dept01" :
-    item.id === "Dept02" ? "dept02" :
-    item.id === "Dept03" ? "dep03" :
-    item.id === "Dept04" ? "dep04" : "dept05";
+function DepartmentEl({department}) {
+    let deptEl = department.id === "Dept01" ? "dept01" :
+    department.id === "Dept02" ? "dept02" :
+    department.id === "Dept03" ? "dep03" :
+    department.id === "Dept04" ? "dep04" : "dept05";
 
     return (      
-        <Link to={`/departments/${item.id}`}>
-            <Card className={department}>
+        <Link to={`/departments/${department.name}`}>
+            <Card className={deptEl}>
                 <CardBody>
-                    <CardTitle className="cardTitle">{item.name} Department</CardTitle>
-                    <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
-                    <CardImg src={item.image} alt={item.name}/>
+                    <CardTitle className="cardTitle">{department.name} Department</CardTitle>
+                    <CardText>Số lượng nhân viên: {department.numberOfStaff}</CardText>
+                    <CardImg src={department.image} alt={department.name}/>
                 </CardBody>
             </Card>
         </Link>
@@ -27,7 +27,7 @@ function DepartmentList(props) {
     const departmentList = props.departments.map((department) => {
         return (
             <div key={department.id} className="col-12 col-md-6 col-lg-4 staff-list">
-                <DepartmentEl item={department} />
+                <DepartmentEl department={department} />
             </div>
         )
     })

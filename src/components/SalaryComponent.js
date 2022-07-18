@@ -3,10 +3,10 @@ import { Card, CardBody, CardText, CardTitle, CardImg, InputGroup, InputGroupTex
 import {Link} from 'react-router-dom';
 
 function RenderStaff ({item}) {
-    let department = item.id === "Dept01" ? "dept01" :
-    item.id === "Dept02" ? "dept02" :
-    item.id === "Dept03" ? "dep03" :
-    item.id === "Dept04" ? "dep04" : "dept05";
+    let department = item.department === "Sale" ? "dept01" :
+                    item.department === "HR" ? "dept02" :
+                    item.department === "Marketing" ? "dep03" :
+                    item.department === "IT" ? "dep04" : "dept05";
 
     return (
         <Card id={item.id}>

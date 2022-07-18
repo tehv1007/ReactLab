@@ -67,6 +67,16 @@ address {
   text-align: center;
 }
 
+.add-button {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.add-button button {
+  height: fit-content;
+}
+
 /* Style for Department Component */
 .cardTitle {
   font-size: x-large;
