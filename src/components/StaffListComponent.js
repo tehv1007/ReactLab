@@ -6,7 +6,7 @@ import {Card, CardBody, CardTitle, CardImg, InputGroup, Input, FormGroup, Form,
 class StaffAddForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             isModalOpen: false,
             id: '',
             name: '',
@@ -40,24 +40,24 @@ class StaffAddForm extends Component {
         this.setState({
             searchValue: this.fullName.value,
         })
-    }
+    };
 
     // Open-close Form thêm nhân viên
     handleToggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen,
-        })
-    }
+        });
+    };
 
     // Lấy dữ liệu vào của Form thêm nhân viên
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
+    
         this.setState({
             [name]: value,
-        })
+        });
     }
 
     // Hàm xử lý khi submit thêm nhân viên với Controlled Form
@@ -81,16 +81,16 @@ class StaffAddForm extends Component {
                 annualLeave: '',
                 overTime: '',
                 salary: ''
-            })
-        } 
-    }
+            });
+        };
+    };
 
     // Blur to a field controlled form
     handleBlur = (field) => (e) => {
         this.setState({
             touched: {...this.state.touched, [field]: true}
-        })
-    }
+        });
+    };
 
     // Name validate
     nameValidate(name) {
@@ -152,138 +152,138 @@ class StaffAddForm extends Component {
             })
         }
 
-        return(
+        return (
             <React.Fragment>
-            <div className='row'>
-                <div className='col-12 col-md-6 add-button'>
-                    <h3>Nhân viên</h3>
-                    <Button color='success'
-                        onClick={this.handleToggleModal}>
-                        <i className='fa fa-plus-square' aria-hidden='true'></i>
-                        {' '}
-                        Thêm nhân viên
-                    </Button>
-                </div>
+                <div className="row">
+                    <div className="col-12 col-md-6 add-button">
+                        <h3>Nhân viên</h3>
+                        <Button color="success" onClick={this.handleToggleModal} >
+                            <i className="fa fa-plus-square" aria-hidden="true"></i>
+                            {' '}
+                            Thêm nhân viên
+                        </Button>
+                    </div>
 
-                <div className='col-12 col-md-6'>
-                    <Form onSubmit={this.handleSearchSubmit}>
+                    <div className="col-12 col-md-6">
+                    <Form onSubmit={this.handleSearchSubmit} >
                         <FormGroup>
                             <InputGroup>
-                                <Input
-                                    type='text'
-                                    placeholder='Tìm kiếm nhân viên...'
-                                    innerRef={(input) => this.fullName = input} />
-                                <Button type='submit' color='primary'>Tìm</Button>
-                            </InputGroup>
+                                <Input 
+                                    type="text" 
+                                    placeholder="Tìm kiếm nhân viên..."
+                                    innerRef={(input) => this.fullName = input}/>
+                                <Button type="submit" color="primary">Tìm kiếm</Button>
+                            </InputGroup>   
                         </FormGroup>
                     </Form>
+                    </div>
                 </div>
-            </div>
-            <hr />
-            <div className='row'>
+				  
+                <hr/>
+                <div className="row">
                     {list}
-            </div>
-            <Modal isOpen={this.state.isModalOpen} toggle={this.handleToggleModal}>
-                <ModalHeader toggle={this.handleToggleModal}>Thêm nhân viên</ModalHeader>
-                <ModalBody>
-                    <Form onSubmit={this.handleAddSubmit}>
-                        <FormGroup row>
-                            <Label htmlFor='name' md={4}>Tên</Label>
-                            <Col md={8}>
-                                <Input type='text' id='name' name='name'
-                                    placeholder='Nhập họ tên nhân viên'
-                                    value={this.state.name}
-                                    valid={invalid === '' && this.state.name !== '' && error.name === ''}
-                                    invalid={invalid !== '' || error.name !== ''}
-                                    onBlur={this.handleBlur('name')}
-                                    onChange={this.handleInputChange}
-                                />
-                                <FormFeedback><>{error.name ? error.name : error}</></FormFeedback>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label htmlFor='doB' md={4}>Ngày sinh</Label>
-                            <Col md={8}>
-                                <Input type='date' id='doB' name='doB'
-                                    value={this.state.doB}
-                                    valid={this.state.name !== '' && error.doB === ''}
-                                    invalid={error.doB !== ''}
-                                    onBlur={this.handleBlur('doB')}
-                                    onChange={this.handleInputChange}
-                                />
-                                <FormFeedback>{error.doB}</FormFeedback>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label htmlFor='startDate' md={4}>Ngày vào công ty</Label>
-                            <Col md={8}>
-                                <Input type='date' id='startDate' name='startDate'
-                                    value={this.state.startDate}
-                                    valid={this.state.startDate !== '' && error.startDate === ''}
-                                    invalid={error.startDate !== ''}
-                                    onBlur={this.handleBlur('startdate')}
-                                    onChange={this.handleInputChange}
-                                />
-                                <FormFeedback>{error.startDate}</FormFeedback>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label htmlFor='department' md={4}>Phòng ban</Label>
-                            <Col md={8}>
-                                <Input type='select' name='department'
-                                value={this.state.department}
-                                onChange={this.handleInputChange}>
-                                    <option defaultValue>Sale</option>
-                                    <option>HR</option>
-                                    <option>Marketing</option>
-                                    <option>IT</option>
-                                    <option>Finance</option>
-                                </Input>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label htmlFor='salaryScale' md={4}>Hệ số lương</Label>
-                            <Col md={8}>
-                                <Input type='text' id='salaryScale' name='salaryScale'
-                                placeholder='1.0 đến 3.0'
-                                value={this.state.salaryScale}
-                                onChange={this.handleInputChange}
-                                />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label htmlFor='annualLeave' md={4}>Số ngày nghỉ còn lại</Label>
-                            <Col md={8}>
-                                <Input type='text' id='annualLeave' name='annualLeave'
-                                placeholder='1.0'
-                                value={this.state.annualLeave}
-                                onChange={this.handleInputChange}
-                                />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label htmlFor='overTime' md={4}>Số ngày đã làm thêm</Label>
-                            <Col md={8}>
-                                <Input type='text' id='overTime' name='overTime'
-                                placeholder='1.0'
-                                value={this.state.overTime}
-                                onChange={this.handleInputChange}
-                                />
-                            </Col>
-                        </FormGroup>
-                        <hr/>
-                        <FormGroup row>
-                            <Col>
-                                <Button type="submit" color="primary" onClick={this.handleClick}>
-                                    Thêm
-                                </Button>
-                            </Col>
-                        </FormGroup>
-                    </Form>
-                </ModalBody>
-            </Modal>
+                </div>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.handleToggleModal}>
+                    <ModalHeader toggle={this.handleToggleModal}>Thêm nhân viên</ModalHeader>
+                    <ModalBody>
+                        <Form onSubmit={this.handleAddSubmit}>
+                            <FormGroup row>
+                                <Label htmlFor="name" md={4}>Tên</Label>
+                                <Col md={8}>
+                                    <Input type="text" id="name" name="name" 
+                                        placeholder="Nhập họ tên nhân viên"
+                                        value={this.state.name}
+                                        valid={invalid === '' && this.state.name !== '' && error.name === ''}
+                                        invalid={invalid !== '' || error.name !== ''}
+                                        onBlur={this.handleBlur('name')}
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <FormFeedback>{error.name ? error.name : invalid}</FormFeedback>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor="doB" md={4}>Ngày sinh</Label>
+                                <Col md={8}>
+                                    <Input type="date" id="doB" name="doB"
+                                        value={this.state.doB}
+                                        valid={error.doB === '' && this.state.doB !== ''}
+                                        invalid={error.doB !== ''}
+                                        onBlur={this.handleBlur('doB')}
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <FormFeedback>{error.doB}</FormFeedback>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor="startDate" md={4}>Ngày vào công ty</Label>
+                                <Col md={8}>
+                                    <Input type="date" id="startDate" name="startDate" 
+                                        value={this.state.startDate}
+                                        valid={error.startDate === '' && this.state.startDate !== ''}
+                                        invalid={error.startDate !== ''}
+                                        onBlur={this.handleBlur('startDate')}
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <FormFeedback>{error.startDate}</FormFeedback>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor="department" md={4}>Phòng ban</Label>
+                                <Col md={8}>
+                                    <Input type="select" name="department"
+                                            value={this.state.department}
+                                            onChange={this.handleInputChange}>
+                                        <option defaultValue>Sale</option>
+										<option>HR</option>
+										<option>Marketing</option>
+										<option>IT</option>
+										<option>Finance</option>
+                                    </Input>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor="salaryScale" md={4}>Hệ số lương</Label>
+                                <Col md={8}>
+                                    <Input type="text" id="salaryScale" name="salaryScale" 
+                                        placeholder="Hệ số lương từ 1.0 -> 3.0"
+                                        value={this.state.salaryScale}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor="annualLeave" md={4}>Số ngày nghỉ còn lại</Label>
+                                <Col md={8}>
+                                    <Input type="text" id="annualLeave" name="annualLeave" 
+                                        placeholder="1.0"
+                                        value={this.state.annualLeave}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label htmlFor="overTime" md={4}>Số ngày đã làm thêm</Label>
+                                <Col md={8}>
+                                    <Input type="text" id="overTime" name="overTime" 
+                                        placeholder="1.0"
+                                        value={this.state.overTime}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                            </FormGroup>
+                            <hr/>
+                            <FormGroup row>
+                                <Col>
+                                    <Button type="submit" color="primary" onClick={this.handleClick}>
+                                        Thêm
+                                    </Button>
+                                </Col>
+                            </FormGroup>
+                        </Form>
+                    </ModalBody>
+                </Modal>
             </React.Fragment>
-        )
+        );
     }
 }
 
@@ -303,17 +303,17 @@ function RenderStaff ({item}) {
     )
 }
 
-//Hiển thị danh sách nhân viên và chức năng tìm kiếm, lọc theo thuộc tính
+// Hàm xử lý lọc nhân viên, sắp xếp nhân viên theo vị trí và hiển thị toàn bộ nhân viên.
 function StaffList(props) {
 
-    return (
-        <div className='container'>
-            <StaffAddForm
-                staffs = {props.staffs}
-                handleAddSubmit = {(data) => props.handleAddSubmit(data)}
+    return(
+        <div className="container container-content">
+            <StaffAddForm 
+                staffs={props.staffs}
+                handleAddSubmit={(data) => props.handleAddSubmit(data)}
             />
         </div>
-    )
+    );
 }
 
 export default StaffList;

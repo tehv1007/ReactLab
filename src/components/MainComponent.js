@@ -210,12 +210,12 @@ class Main extends Component {
 
     // Hàm tạo ID duy nhất theo thứ tự tăng dần 1 đơn vị
     generateID() {
-        let id = this.state.staffs.length;
+        let id = this.state.staffs.length - 1;
         return id += 1;
     };
 
 // Hàm nhận dữ liệu newStaff từ Staffs Component và xử lý dữ liệu lưu vào localStorage
-    handleSubmitAdd = (data) => {
+    handleAddSubmit = (data) => {
         var staffs=this.state.staffs;
         var newStaff = {
             id: this.generateID(),
@@ -290,7 +290,7 @@ class Main extends Component {
                 <Header/>
                     <Switch>
                         <Route exact path="/home" component={() =><Home image={this.state.image} />} />
-                        <Route exact path="/staffs" component={() => <StaffList staffs={staffs} handleSubmitAdd={this.handleSubmitAdd}/>} />
+                        <Route exact path="/staffs" component={() => <StaffList staffs={staffs} handleAddSubmit={this.handleAddSubmit}/>} />
                         <Route path="/staffs/:staffId" component={StaffId} />
                         <Route exact path="/departments" 
                             component={() => <DepartmentList departments={departments}/>} /> 

@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import dateFormat from "dateformat";
 import {Link} from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 
-class StaffInfo extends Component {
-
-    // Using Boostrap Cards to render staff info
-    renderStaff(staff) {
+// Using Boostrap Cards to render staff info
+function RenderStaff({staff}) {
         if(staff != null) {
             return(
                 <div className="card" cursor="pointer" style={{margin: "10px"}}>
@@ -23,7 +21,7 @@ class StaffInfo extends Component {
                                 <p className="card-text">Mã nhân viên : EC-00{staff.id}</p>
                                 <p className="card-text">Ngày sinh : {dateFormat(staff.doB, "dd/mm/yyyy")}</p>
                                 <p className="card-text">Ngày vào công ty : {dateFormat(staff.startDate, "dd/mm/yyyy")}</p>
-                                <p className="card-text"> Phòng ban : {staff.department.name} </p>
+                                <p className="card-text"> Phòng ban : {staff.department} </p>
                                 <p className="card-text"> Số ngày nghỉ còn lại : {staff.annualLeave}</p>
                                 <p className="card-text"> Số ngày làm thêm : {staff.overTime}</p>                           
                             </div>
@@ -39,10 +37,8 @@ class StaffInfo extends Component {
         }
     }
 
-    render() {
-        const staff = this.props.staff;
-        const staffItem = this.renderStaff(staff);
-        console.log(staff);
+function StaffInfo(props) {
+        const staff = props.staff;
 
         if(staff == null) {
             return <div></div>
@@ -64,11 +60,10 @@ class StaffInfo extends Component {
                     </div>
                 </div> 
                 <div className="row">
-                    {staffItem}
+                    <RenderStaff staff={staff}/>
                 </div>
             </div>
         )}    
-    }
 }
 
 export default StaffInfo;
