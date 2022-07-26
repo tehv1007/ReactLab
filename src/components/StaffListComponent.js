@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {Card, CardBody, CardTitle, CardImg, InputGroup, Input, FormGroup, Form,
-        Button, Label, Col, FormFeedback, Modal, ModalHeader, ModalBody} from 'reactstrap';
+        Button, Label, Row, Col, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {LocalForm, Control, Errors} from 'react-redux-form';
+
+// Form validate
+const required = (val) => val;
+const minLength = (min) => (val) => !(val) || (val.length >= min);
+const maxLength = (max) => (val) => !(val) || (val.length < max);
+const isNumber = (val) => !isNaN(Number(val));
+const salaryScaleValid = (val) => Number(val) >= 1.0 && Number(val) <= 3.0;
 
 class StaffAddForm extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             isModalOpen: false,
             id: '',
             name: '',
@@ -17,26 +25,17 @@ class StaffAddForm extends Component {
             annualLeave: 0,
             overTime: 0,
             salary: '',
-            clicked: false,
-            touched: {
-                name: false,
-                doB: false,
-                startDate: false,
-            },
             searchValue: ''
         }
 
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleToggleModal = this.handleToggleModal.bind(this);
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     }
 
     //Hàm xử lý tìm kiếm nhân viên với Uncontrolled Form
     handleSearchSubmit (e) {
-        e.preventDefault();
+        e.preventDefault(); 
         this.setState({
             searchValue: this.fullName.value,
         })
@@ -50,8 +49,8 @@ class StaffAddForm extends Component {
     };
 
     // Lấy dữ liệu vào của Form thêm nhân viên
-    handleInputChange(event) {
-        const target = event.target;
+    handleInputChange(values) {
+        const target = values.target;
         const value = target.value;
         const name = target.name;
     
@@ -61,83 +60,12 @@ class StaffAddForm extends Component {
     }
 
     // Hàm xử lý khi submit thêm nhân viên với Controlled Form
-    handleAddSubmit(e) {
-        e.preventDefault();
-        const invalid = this.nameValidate(this.state.name);
-        const error = this.submitValidate(this.state.name, this.state.doB, this.state.startDate);
-        if (invalid === ''
-            && error.name === ''
-            && error.doB === ''
-            && error.startDate === ''
-        ) {
+    handleAddSubmit() {
             this.props.handleAddSubmit(this.state);
-            this.handleToggleModal();
-            this.setState({
-                name: '',
-                doB: '',
-                salaryScale: '',
-                startDate: '',
-                department: 'Sale',
-                annualLeave: '',
-                overTime: '',
-                salary: ''
-            });
-        };
-    };
-
-    // Blur to a field controlled form
-    handleBlur = (field) => (e) => {
-        this.setState({
-            touched: {...this.state.touched, [field]: true}
-        });
-    };
-
-    // Name validate
-    nameValidate(name) {
-        let invalid = '';
-        if(this.state.touched.name && name.length < 3) {
-            invalid = "Yêu cầu tên có nhiều hơn 2 ký tự";
-        } else if (this.state.touched.name && name.length > 29) {
-            invalid = "Yêu cầu tên có ít hơn 30 ký tự";
-        }
-        return invalid;
-    }
-
-    // Form submit validate
-    submitValidate(name, doB, startDate) {
-        const errors = {
-            name: '',
-            doB: '',
-            startDate: ''
-        };
-
-        if(this.state.clicked && name === '') {
-            errors.name = "Yêu cầu nhập";
-        };
-
-        if(this.state.clicked && doB === '') {
-            errors.doB = "Yêu cầu nhập";
-        };
-
-        if(this.state.clicked && startDate === '') {
-            errors.startDate = "Yêu cầu nhập";
-        };
-
-        return errors;
-    }
-
-    // Click to submit button on Controlled form
-    handleClick() {
-        this.setState({
-            clicked: true
-        })
-    }
+    } 
 
     // View render for StaffAddForm component
     render() {
-        const invalid = this.nameValidate(this.state.name);
-        const error = this.submitValidate(this.state.name, this.state.doB, this.state.startDate);
-        
         if(this.props.staffs) {
             const filtered = !this.state.searchValue
             ? this.props.staffs
@@ -152,7 +80,7 @@ class StaffAddForm extends Component {
             })
         }
 
-        return (
+        return(
             <React.Fragment>
                 <div className="row">
                     <div className="col-12 col-md-6 add-button">
@@ -178,112 +106,152 @@ class StaffAddForm extends Component {
                     </Form>
                     </div>
                 </div>
-				  
-                <hr/>
-                <div className="row">
-                    {list}
+                <hr />
+                <div className='row'>
+                        {list}
                 </div>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.handleToggleModal}>
                     <ModalHeader toggle={this.handleToggleModal}>Thêm nhân viên</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.handleAddSubmit}>
-                            <FormGroup row>
+                        <LocalForm onSubmit={this.handleAddSubmit}>
+                            <Row className='form-group'>
                                 <Label htmlFor="name" md={4}>Tên</Label>
                                 <Col md={8}>
-                                    <Input type="text" id="name" name="name" 
+                                    <Control.text model=".name" id="name" name="name" 
                                         placeholder="Nhập họ tên nhân viên"
-                                        value={this.state.name}
-                                        valid={invalid === '' && this.state.name !== '' && error.name === ''}
-                                        invalid={invalid !== '' || error.name !== ''}
-                                        onBlur={this.handleBlur('name')}
-                                        onChange={this.handleInputChange}
+                                        className='form-control'
+                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
+                                        validators={{
+                                            required, minLength: minLength(3), maxLength: maxLength(30)
+                                        }}
                                     />
-                                    <FormFeedback>{error.name ? error.name : invalid}</FormFeedback>
+                                    <Errors
+                                        className='text-danger'
+                                        model=".name"
+                                        show='touched'
+                                        messages={{
+                                            required: "Yêu cầu nhập!",
+                                            minLength:'Yêu cầu nhiều hơn 2 ký tự!',
+                                            maxLength: 'Yêu cầu ít hơn 30 ký tự!',
+                                        }}
+                                    />
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className='form-group'>
                                 <Label htmlFor="doB" md={4}>Ngày sinh</Label>
                                 <Col md={8}>
-                                    <Input type="date" id="doB" name="doB"
+                                    <Control type='date' model=".doB" id="doB" name="doB"
+                                        className='form-control'
                                         value={this.state.doB}
-                                        valid={error.doB === '' && this.state.doB !== ''}
-                                        invalid={error.doB !== ''}
-                                        onBlur={this.handleBlur('doB')}
-                                        onChange={this.handleInputChange}
+                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
+                                        validators={{
+                                            required,
+                                        }}
                                     />
-                                    <FormFeedback>{error.doB}</FormFeedback>
+                                    <Errors 
+                                        className="text-danger"
+                                        model='.doB'
+                                        show="touched"
+                                        messages={{
+                                            required: 'Yêu cầu nhập!',
+                                        }}
+                                    />
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className='form-group'>
                                 <Label htmlFor="startDate" md={4}>Ngày vào công ty</Label>
                                 <Col md={8}>
-                                    <Input type="date" id="startDate" name="startDate" 
+                                    <Control type="date" model='.startDate' id="startDate" name="startDate" 
                                         value={this.state.startDate}
-                                        valid={error.startDate === '' && this.state.startDate !== ''}
-                                        invalid={error.startDate !== ''}
-                                        onBlur={this.handleBlur('startDate')}
-                                        onChange={this.handleInputChange}
+                                        className='form-control'
+                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
+                                        validators={{
+                                            required,
+                                        }}
                                     />
-                                    <FormFeedback>{error.startDate}</FormFeedback>
+                                    <Errors
+                                        className='text-danger'
+                                        model='.startDate'
+                                        show='touched'
+                                        messages={{
+                                            required: 'Yêu cầu nhập!',
+                                        }}
+                                    />
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className='form-group'>
                                 <Label htmlFor="department" md={4}>Phòng ban</Label>
                                 <Col md={8}>
-                                    <Input type="select" name="department"
-                                            value={this.state.department}
-                                            onChange={this.handleInputChange}>
-                                        <option defaultValue>Sale</option>
-										<option>HR</option>
-										<option>Marketing</option>
-										<option>IT</option>
-										<option>Finance</option>
-                                    </Input>
+                                    <Control.select model=".department" name="department" id="department"
+                                                    className="form-control"
+                                                    defaultValue='Sale'
+                                                    onChange={(modelValue) => this.handleInputChange(modelValue)}
+                                                    >
+                                        <option>Sale</option>
+                                        <option>HR</option>
+                                        <option>Marketing</option>
+                                        <option>IT</option>
+                                        <option>Finance</option>
+                                    </Control.select>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className='form-group'>
                                 <Label htmlFor="salaryScale" md={4}>Hệ số lương</Label>
                                 <Col md={8}>
-                                    <Input type="text" id="salaryScale" name="salaryScale" 
-                                        placeholder="Hệ số lương từ 1.0 -> 3.0"
-                                        value={this.state.salaryScale}
-                                        onChange={this.handleInputChange}
+                                    <Control.text model=".salaryScale" 
+                                        id="salaryScale" name="salaryScale" 
+                                        placeholder="1.0 -> 3.0"
+                                        className="form-control"
+                                        defaultValue={1.0}
+                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
+                                        validators={{
+                                            isNumber, salaryScaleValid,
+                                        }}
+                                    />
+                                    <Errors
+                                        className='text-danger'
+                                        model='.salaryScale'
+                                        show='touched'
+                                        messages={{
+                                            isNumber: 'Xin hãy nhập một số!',
+                                            salaryScaleValid: 'Hệ số lương từ 1.0 đến 3.0'
+                                        }}
                                     />
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="annualLeave" md={4}>Số ngày nghỉ còn lại</Label>
                                 <Col md={8}>
-                                    <Input type="text" id="annualLeave" name="annualLeave" 
+                                    <Control.text model=".annualLeave" id="annualLeave" name="annualLeave" 
                                         placeholder="1.0"
-                                        value={this.state.annualLeave}
-                                        onChange={this.handleInputChange}
+                                        className='form-control'
+                                        defaultValue={0}
+                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
                                     />
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="overTime" md={4}>Số ngày đã làm thêm</Label>
                                 <Col md={8}>
-                                    <Input type="text" id="overTime" name="overTime" 
+                                    <Control.text model=".overTime" id="overTime" name="overTime" 
                                         placeholder="1.0"
-                                        value={this.state.overTime}
-                                        onChange={this.handleInputChange}
+                                        className='form-control'
+                                        defaultValue={0}
+                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
                                     />
                                 </Col>
-                            </FormGroup>
+                            </Row>
                             <hr/>
-                            <FormGroup row>
-                                <Col>
-                                    <Button type="submit" color="primary" onClick={this.handleClick}>
-                                        Thêm
-                                    </Button>
-                                </Col>
-                            </FormGroup>
-                        </Form>
+                            <Row className='form-group m-1'>
+                                <Button type="submit" color="primary">
+                                    Thêm
+                                </Button>
+                            </Row>
+                        </LocalForm>
                     </ModalBody>
                 </Modal>
             </React.Fragment>
-        );
+        )
     }
 }
 
@@ -303,17 +271,17 @@ function RenderStaff ({item}) {
     )
 }
 
-// Hàm xử lý lọc nhân viên, sắp xếp nhân viên theo vị trí và hiển thị toàn bộ nhân viên.
+//Hiển thị danh sách nhân viên và chức năng tìm kiếm, lọc theo thuộc tính
 function StaffList(props) {
 
-    return(
-        <div className="container container-content">
-            <StaffAddForm 
-                staffs={props.staffs}
-                handleAddSubmit={(data) => props.handleAddSubmit(data)}
+    return (
+        <div className='container'>
+            <StaffAddForm
+                staffs = {props.staffs}
+                handleAddSubmit = {(data) => props.handleAddSubmit(data)}
             />
         </div>
-    );
+    )
 }
 
 export default StaffList;

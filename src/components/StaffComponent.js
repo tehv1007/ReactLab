@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import dateFormat from "dateformat";
 import {Link} from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 
-// Using Boostrap Cards to render staff info
-function RenderStaff({staff}) {
+class StaffInfo extends Component {
+
+    // Using Boostrap Cards to render staff info
+    renderStaff(staff) {
         if(staff != null) {
             return(
                 <div className="card" cursor="pointer" style={{margin: "10px"}}>
@@ -37,8 +39,10 @@ function RenderStaff({staff}) {
         }
     }
 
-function StaffInfo(props) {
-        const staff = props.staff;
+    render() {
+        const staff = this.props.staff;
+        const staffItem = this.renderStaff(staff);
+        console.log(staff);
 
         if(staff == null) {
             return <div></div>
@@ -60,10 +64,11 @@ function StaffInfo(props) {
                     </div>
                 </div> 
                 <div className="row">
-                    <RenderStaff staff={staff}/>
+                    {staffItem}
                 </div>
             </div>
         )}    
+    }
 }
 
 export default StaffInfo;

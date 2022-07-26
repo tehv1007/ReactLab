@@ -7,9 +7,14 @@ import StaffList from './StaffListComponent';
 import DepartmentList from './DepartmentComponent';
 import DepartmentStaff from './DepartmentStaffComponent';
 import Salary from './SalaryComponent';
-import { IMAGE } from '../shared/staffs';   
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+const mapStateToProps = state => {
+    return {
+        image: state.image,
+    };
+};
 
 class Main extends Component {                 
 
@@ -194,7 +199,6 @@ class Main extends Component {
                     image: '/assets/images/staff16.jpg',
                 },
             ],
-            image: IMAGE  
         };
     }
 
@@ -292,8 +296,7 @@ class Main extends Component {
                         <Route exact path="/home" component={() =><Home image={this.state.image} />} />
                         <Route exact path="/staffs" component={() => <StaffList staffs={staffs} handleAddSubmit={this.handleAddSubmit}/>} />
                         <Route path="/staffs/:staffId" component={StaffId} />
-                        <Route exact path="/departments" 
-                            component={() => <DepartmentList departments={departments}/>} /> 
+                        <Route exact path="/departments" component={() => <DepartmentList departments={departments}/>} /> 
                         <Route path="/departments/:department" component={DeptStaff}/> 
                         <Route exact path="/salary" component={() => <Salary staffs={staffs}/>}/> 
                         <Redirect to='/home'/>
@@ -304,4 +307,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));
