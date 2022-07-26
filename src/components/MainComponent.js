@@ -293,7 +293,7 @@ class Main extends Component {
             <div>
                 <Header/>
                     <Switch>
-                        <Route exact path="/home" component={() =><Home image={this.state.image} />} />
+                        <Route exact path="/home" component={() =><Home image={this.props.image} />} />
                         <Route exact path="/staffs" component={() => <StaffList staffs={staffs} handleAddSubmit={this.handleAddSubmit}/>} />
                         <Route path="/staffs/:staffId" component={StaffId} />
                         <Route exact path="/departments" component={() => <DepartmentList departments={departments}/>} /> 

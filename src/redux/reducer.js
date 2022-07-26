@@ -1,4 +1,4 @@
-import { IMAGE } from "../shared/staffs";
+import { IMAGE } from "../shared/image";
 
 export const initialState = {
     image: IMAGE,
