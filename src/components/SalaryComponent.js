@@ -18,7 +18,7 @@ function RenderStaff ({item}) {
                         <CardImg src={item.image} alt={item.name} />
                     </div>
                     <div className='col-8'>
-                        <CardText>Phòng ban: {item.department.name}</CardText>
+                        <CardText>Phòng ban: {item.department}</CardText>
                         <CardText>Mã nhân viên: EC-00{item.id}</CardText>
                         <CardText>Hệ số lương: {item.salaryScale}</CardText>
                         <CardText>Số ngày làm thêm: {item.overTime}</CardText>
