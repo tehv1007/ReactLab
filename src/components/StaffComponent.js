@@ -13,7 +13,7 @@ function RenderStaff({staff}) {
                         <div className="col-md-4">
                             <img src={staff.image} className="card-img-top" alt={staff.name} style={{width: "100%"}} />
                             <h5 className="card-title text-center mt-2">{staff.name}</h5>
-                            <p className="card-text text-center"> Chức danh : {staff.role}</p>
+                            <p className="card-text text-center"> Chức danh : {staff.salaryScale === 1 ? 'Nhân viên' : 'Quản lý'}</p>
                         </div>
 
                         <div className="col-md-8">
