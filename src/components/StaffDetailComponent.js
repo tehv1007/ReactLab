@@ -1,50 +1,68 @@
-import React, { useState } from "react";
-import dateFormat from "dateformat";
-import {Link} from 'react-router-dom';
-import {Breadcrumb, BreadcrumbItem, Button,
-        Modal, ModalHeader, ModalBody, Row, Col, Label} from 'reactstrap';
+import React, {useState} from 'react';
+import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardBody, Button,
+        Modal, ModalHeader, ModalBody,
+        Row, Col, Label} from 'reactstrap';
 import { LocalForm, Control, Errors} from 'react-redux-form'
+import dateFormat from 'dateformat';
+import { Link } from 'react-router-dom';
 
-
-// Using Boostrap Cards to render staff info
-function RenderStaff({staff, departments, staffInfoChange}) {
+// Hàm hiển thị thông tin chi tiết của nhân viên.
+function RenderStaff({staff, departments, onChangeInfo }) {
     let doB = dateFormat(staff.doB, "dd/mm/yyyy");
     let startDate = dateFormat(staff.startDate, "dd/mm/yyyy");
     let position = staff.salaryScale > 1 ? "Quản lý" : "Nhân viên";
     let department = departments.find((department) => {
         return department.id === staff.departmentId;
     });
-
+    let departmentName = department.name;
     return(
-        <div className="card" cursor="pointer" style={{margin: "10px"}}>
-            <div className="row g-0 mt-3" style={{padding: "15px"}}>
-
-                <div className="col-md-4">
-                    <img src={staff.image} className="card-img-top" alt={staff.name} style={{width: "100%"}} />
-                    <h5 className="card-title text-center mt-2">{staff.name}</h5>
-                    <p className="card-text text-center"> Chức danh : {position}</p>
-                    <Button color="success" onClick={staffInfoChange}>Cập Nhật</Button>
-                </div>
-
-                <div className="col-md-8">
-                    <div className="card-body">
-                        <p className="card-text">Mã nhân viên : EC-00{staff.id}</p>
-                        <p className="card-text">Ngày sinh : {doB}</p>
-                        <p className="card-text">Ngày vào công ty : {startDate}</p>
-                        <p className="card-text"> Phòng ban : {department.name} </p>
-                        <p className="card-text"> Số ngày nghỉ còn lại : {staff.annualLeave}</p>
-                        <p className="card-text"> Số ngày làm thêm : {staff.overTime}</p>                           
-                    </div>
-                </div>
-
+        <div className="row">
+            <div className="col-12 col-md-4 col-lg-3 m-auto">
+                <Card>
+                    <CardBody>
+                        <CardImg src={staff.image} alt={staff.name} />
+                    </CardBody>
+                    <Button color="success" onClick={onChangeInfo}>Cập Nhật</Button>
+                </Card>
             </div>
-        </div>            
+            <div className="col-12 col-md-8 col-lg-9 p-3">
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Họ và tên</span>
+                    <input type="text" className="form-control" placeholder="Username" name="usrname" value={staff.name} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Vị trí</span>
+                    <input type="text" className="form-control" value={position} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Ngày sinh</span>
+                    <input type="text" className="form-control" value={doB} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Ngày vào công ty</span>
+                    <input type="text" className="form-control" value={startDate} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Phòng ban</span>
+                    <input type="text" className="form-control" value={departmentName} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Số ngày nghỉ còn lại</span>
+                    <input type="text" className="form-control" value={staff.annualLeave} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Số ngày đã làm thêm</span>
+                    <input type="text" className="form-control" value={staff.overTime} disabled />
+                </div>
+            </div>
+        </div>
     );
 }
 
-function StaffInfo(props) {
+// Hàm xử lý và hiển thị thông tin chi tiết của nhân viên.
+const StaffInfo = (props) => {
     let staff = props.staff;
-
+    
     // Validate Form
     const required = (val) => val !== '';
     const minLength = (min) => (val) => !(val) || (val.length >= min);
@@ -60,8 +78,8 @@ function StaffInfo(props) {
         setToggleModal(!isModalOpen);
     }
     
-    function staffInfoChange() {
-        handleToggleModal();
+    function onChangeInfo() {
+        handleToggleModal()
     };
 
     function handleInputChange (values) {
@@ -69,39 +87,39 @@ function StaffInfo(props) {
         const name = target.name;
         const value = target.value;
         if(name === 'doB') {
-            setDoB([name], value);;
+            setDoB(value);
         }
         else if(name === 'startDate') {
-            setStartDate([name], value);
+            setStartDate(value);
         }
+        // setDoB([name], value);
+        // setStartDate([name], value);
+
     };
 
    function onSubmit(values) {
-       props.staffInfoChange(staff.id, values.name, values.doB, values.startDate, values.departmentId, values.salaryScale, values.annualLeave, values.overTime);
+       props.changeInfo(staff.id, values.name, values.doB, values.startDate, values.departmentId, values.salaryScale, values.annualLeave, values.overTime);
        handleToggleModal()
    }
 
-
-    if(staff == null) {
-        return <div></div>
-    } else {
-    return(
-        <div className="container">
-            <div className="row">
-                <Breadcrumb>
-                    <BreadcrumbItem>
+    if (staff != null) {
+        return(
+            <div className="container container-content">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem>
                         <Link to='/staffs'>Nhân viên</Link>
-                    </BreadcrumbItem>
-                    <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
-                </Breadcrumb>
-            </div>
-            <hr/>  
-            <div className="row">
-                <div className="col-12 ">
-                    <h3>Thông tin nhân viên</h3>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
+                    </Breadcrumb>
                 </div>
-            </div> 
-            <RenderStaff staff={staff} departments={props.departments.departments} staffInfoChange={staffInfoChange}/>
+                <hr/>  
+                <div className="row">
+                    <div className="col-12 ">
+                        <h3>Thông tin cơ bản</h3>
+                    </div>
+                </div> 
+                <RenderStaff staff={staff} departments={props.departments.departments} onChangeInfo={onChangeInfo}/>
                 <Modal isOpen={isModalOpen} toggle={handleToggleModal}>
                     <ModalHeader toggle={handleToggleModal}>Cập nhật thông tin</ModalHeader>
                     <ModalBody>
@@ -123,8 +141,8 @@ function StaffInfo(props) {
                                         show='touched'
                                         messages={{
                                             required: "Yêu cầu nhập!",
-                                            minLength:'Yêu cầu tên có nhiều hơn 2 ký tự!',
-                                            maxLength: 'Yêu cầu tên có ít hơn 30 ký tự!',
+                                            minLength:'Yêu cầu nhiều hơn 2 ký tự!',
+                                            maxLength: 'Yêu cầu ít hơn 30 ký tự!',
                                         }}
                                     />
                                 </Col>
@@ -182,10 +200,10 @@ function StaffInfo(props) {
                                                     onChange={(modelValue) => handleInputChange(modelValue)}
                                                     >
                                         <option value="Dept01">Sale</option>
-                                        <option value="Dept02">HR</option>
                                         <option value="Dept03">Marketing</option>
-                                        <option value="Dept04">IT</option>
                                         <option value="Dept05">Finance</option>
+                                        <option value="Dept02">HR</option>
+                                        <option value="Dept04">IT</option>
                                     </Control.select>
                                 </Col>
                             </Row>
@@ -194,7 +212,7 @@ function StaffInfo(props) {
                                 <Col md={8}>
                                     <Control.text model=".salaryScale" 
                                         id="salaryScale" name="salaryScale" 
-                                        placeholder="1.0 -> 3.0"
+                                        placeholder="1.0 đến 3.0"
                                         className="form-control"
                                         defaultValue={props.staff.salaryScale}
                                         validators={{
@@ -206,7 +224,7 @@ function StaffInfo(props) {
                                         model='.salaryScale'
                                         show='touched'
                                         messages={{
-                                            isNumber: 'Xin hãy nhập một số!',
+                                            isNumber: 'Trường này phải có giá trị là số!',
                                             salaryScaleValid: 'Hệ số lương từ 1.0 đến 3.0'
                                         }}
                                     />
@@ -242,7 +260,12 @@ function StaffInfo(props) {
                     </ModalBody>
                 </Modal>
             </div>
-    )}    
+        );
+    } else {
+        return(
+            <div></div>
+        )
+    }
 }
 
 export default StaffInfo;

@@ -31,21 +31,21 @@ function DepartmentStaff(props) {
 
     return (
         <div className="container">
-        <div className="row">
-            <Breadcrumb>
-                <BreadcrumbItem><Link to='/departments'>Phòng ban</Link></BreadcrumbItem>
-                <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
-            </Breadcrumb>
-        </div>
-        <hr/>
-        <div className="row">
-            <div className="col-12 ">
-                <h3>Danh sách nhân viên phòng {props.department.name}</h3>
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to='/departments'>Phòng ban</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
+                </Breadcrumb>
             </div>
-        </div>
-        <div className="row"> 
-            {list}
-        </div>
+            <hr/>
+            <div className="row">
+                <div className="col-12 ">
+                    <h3>Danh sách nhân viên phòng {props.department.name}</h3>
+                </div>
+            </div>
+            <div className="row"> 
+                {list}
+            </div>
     </div>
     )
 }

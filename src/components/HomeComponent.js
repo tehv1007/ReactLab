@@ -14,7 +14,7 @@ function Home(props) {
                     </div>
                 </div>
             </Jumbotron>
-            <img className='featured-img' src={props.image.img} alt={props.image.name} width="100%"/>
+            <img className='featured-img' src={props.image.image} alt={props.image.name} width="100%"/>
         </div>
     );
 }

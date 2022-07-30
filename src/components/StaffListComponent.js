@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import {Card, CardBody, CardTitle, CardImg, InputGroup, Input, FormGroup, Form,
         Button, Label, Row, Col, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {LocalForm, Control, Errors} from 'react-redux-form';
+import { Loading } from './LoadingComponent';
+import { FadeTransform } from 'react-animation-components';
 
 // Form validate
 const required = (val) => val;
@@ -16,17 +18,10 @@ class StaffAddForm extends Component {
         super(props);
         this.state = {
             isModalOpen: false,
-            id: '',
-            name: '',
             doB: '',
-            salaryScale: 1.0,
             startDate: '',
-            department: 'Sale',
-            annualLeave: 0,
-            overTime: 0,
-            salary: '',
             searchValue: ''
-        }
+        };
 
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
         this.handleToggleModal = this.handleToggleModal.bind(this);
@@ -35,18 +30,18 @@ class StaffAddForm extends Component {
 
     //Hàm xử lý tìm kiếm nhân viên với Uncontrolled Form
     handleSearchSubmit (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         this.setState({
             searchValue: this.fullName.value,
-        })
-    };
+        });
+    }
 
     // Open-close Form thêm nhân viên
     handleToggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen,
         });
-    };
+    }
 
     // Lấy dữ liệu vào của Form thêm nhân viên
     handleInputChange(values) {
@@ -60,9 +55,13 @@ class StaffAddForm extends Component {
     }
 
     // Hàm xử lý khi submit thêm nhân viên với Controlled Form
-    handleAddSubmit() {
-            this.props.handleAddSubmit(this.state);
+    handleAddSubmit(values) {
+            this.props.postStaff(values.name, values.doB, values.startDate, values.departmentId, values.salaryScale, values.annualLeave, values.overTime);
     } 
+
+    staffDelete(staffId) {
+        this.props.staffDelete(staffId);
+    }
 
     // View render for StaffAddForm component
     render() {
@@ -74,7 +73,8 @@ class StaffAddForm extends Component {
             var list = filtered.map((staff) => {
                 return(
                     <div key={staff.id} className="col-6 col-md-4 col-lg-2 staff-list">
-                        <RenderStaff item={staff} />
+                        <RenderStaff item={staff} staffDelete = { (staffId) => this.staffDelete(staffId)}
+                        staffs={this.props.staffs} />
                     </div>
                 )
             })
@@ -256,32 +256,56 @@ class StaffAddForm extends Component {
 }
 
 //Hiển thị hình ảnh và họ tên nhân viên
-function RenderStaff ({item}) {
+function RenderStaff ({ item, staffDelete }) {
     return(
-        <Card id={item.id} className='staffEl'>
-            <Link to={`/staffs/${item.id}`}>
+        <FadeTransform in
+        transformProps={{exitTransForm: 'scale(0.5) translateY(-50%)'}}>
+            <Card id={item.id} className='staffEl'>
+
                 <CardBody>
                     <CardImg src={item.image} alt={item.name} />
                     <CardTitle className='nameTitle text-center'>
                         {item.name}
                     </CardTitle>
+                    <div className="hide-show-btn">
+                        <Link to={`/staffs/${item.id}`}>
+                            <Button color="primary m-2" size="sm">Chi tiết</Button>
+                        </Link>
+                        <Button color="danger" size="sm" onClick = {() => {staffDelete(item.id)}}>Xóa</Button>
+                    </div>
                 </CardBody>
-            </Link>
-        </Card>
+
+            </Card>
+        </FadeTransform>
     )
 }
 
 //Hiển thị danh sách nhân viên và chức năng tìm kiếm, lọc theo thuộc tính
 function StaffList(props) {
-
-    return (
-        <div className='container'>
-            <StaffAddForm
-                staffs = {props.staffs}
-                handleAddSubmit = {(data) => props.handleAddSubmit(data)}
-            />
-        </div>
-    )
+    if (props.staffs.isLoading === true) {
+        return (
+            <div className="container container-content p-4 text-center">
+                <Loading/>
+            </div>
+        );
+    }
+    else if (props.staffs.errMess) {
+        return(
+            <div className="container container-content p-4 text-center">
+                <h4>{props.staffs.errMess}</h4>
+            </div>
+        );
+    } else
+        return (
+            <div className='container'>
+                <StaffAddForm
+                    staffs = {props.staffs.staffs}
+                    postStaff = {props.postStaff}
+                    staffDelete = {props.staffDelete}
+                    staffInfoChange = {props.staffInfoChange}
+                />
+            </div>
+        )
 }
 
 export default StaffList;
