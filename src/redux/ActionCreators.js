@@ -113,38 +113,36 @@ export const staffInfoChange = (staffId, name, doB, startDate, departmentId, sal
         overTime: overTime,
     }
     staffChanged.image = "/assets/images/newstaff.png"; 
-    let testurl =  baseUrl + 'staffs/' + staffId;
-    console.log('TEST  URL ' + testurl);
-    console.log('STAFF CHANGE ' + JSON.stringify(staffChanged));
         
-        return fetch(baseUrl + 'staffs/' + staffId, {
-            method: "PATCH",
-            body: JSON.stringify(staffChanged),
-            headers: {
-                "Access-Control-Allow-Origin": "https://rjs101xbackend.herokuapp.com",
-                "Access-Control-Allow-Credentials": "true",
-                "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                "Content-Type": "application/json"
-            },
-            credentials: "same-origin"
-            })
-            .then(response => { if (response.ok) {
-            return response;
-            } else {
-                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                error.response = response;
-                throw error;
-                }
-            },
-            error => {
-                throw error;
-            })
-            .then(response => response.json())
-            .then(response => console.log('RESPONSE ' + response))
-            .then(() => dispatch(fetchStaffsSalary()))
-            .then(() => dispatch(fetchDepartments()))
-            .catch(error => { console.log('CHANGE STAFF', error.message); alert('Your update is failed\nError: ' + error.message); });
+    return fetch(baseUrl + 'staffs/' + staffId, {
+        method: "PATCH",
+        body: JSON.stringify(staffChanged),
+        headers: {
+            "Access-Control-Allow-Origin": "https://rjs101xbackend.herokuapp.com",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT,PATCH",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
+        },
+        credentials: "same-origin"
+        })
+        .then(response => { if (response.ok) {
+        return response;
+        } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+            throw error;
+        })
+        .then(response => response.json())
+        .then(response => console.log('RESPONSE ' + response))
+        .then(() => dispatch(fetchStaffsSalary()))
+        .then(() => dispatch(fetchDepartments()))
+        .catch(error => { console.log('CHANGE STAFF', error.message); alert('Your update is failed\nError: ' + error.message); });
 }
 
 export const addStaffs = (staffs) =>({
