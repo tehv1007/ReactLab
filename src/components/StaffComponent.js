@@ -8,10 +8,10 @@ import { LocalForm, Control, Errors} from 'react-redux-form'
 
 // Using Boostrap Cards to render staff info
 function RenderStaff({staff, departments, staffInfoChange}) {
-    let doB = dateFormat(staff.doB, "dd/mm/yyyy");
-    let startDate = dateFormat(staff.startDate, "dd/mm/yyyy");
-    let position = staff.salaryScale > 1 ? "Quản lý" : "Nhân viên";
-    let department = departments.find((department) => {
+    const doB = dateFormat(staff.doB, "dd/mm/yyyy");
+    const startDate = dateFormat(staff.startDate, "dd/mm/yyyy");
+    const position = staff.salaryScale > 1 ? "Quản lý" : "Nhân viên";
+    const department = departments.find((department) => {
         return department.id === staff.departmentId;
     });
 
@@ -42,7 +42,7 @@ function RenderStaff({staff, departments, staffInfoChange}) {
     );
 }
 
-function StaffInfo(props) {
+const StaffInfo = (props) => {
     let staff = props.staff;
 
     // Validate Form

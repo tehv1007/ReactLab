@@ -28,7 +28,8 @@ const mapDispatchToProps = dispatch => ({
     staffDelete: (staffId) => dispatch(staffDelete(staffId)),
     fetchDepartments: () => {dispatch(fetchDepartments())},
     fetchStaffsSalary: () => {dispatch(fetchStaffsSalary())},
-    staffInfoChange: (staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => dispatch(staffInfoChange(staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)),
+    staffInfoChange: (staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => 
+                    dispatch(staffInfoChange(staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)),
 });
 
 class Main extends Component {                 
