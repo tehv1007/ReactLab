@@ -182,16 +182,16 @@ class StaffAddForm extends Component {
                             <Row className='form-group'>
                                 <Label htmlFor="department" md={4}>Phòng ban</Label>
                                 <Col md={8}>
-                                    <Control.select model=".department" name="department" id="department"
+                                    <Control.select model=".departmentId" name="departmentId" id="departmentId"
                                                     className="form-control"
-                                                    defaultValue='Sale'
+                                                    defaultValue='Dept01'
                                                     onChange={(modelValue) => this.handleInputChange(modelValue)}
                                                     >
-                                        <option>Sale</option>
-                                        <option>HR</option>
-                                        <option>Marketing</option>
-                                        <option>IT</option>
-                                        <option>Finance</option>
+                                        <option value="Dept01">Sale</option>
+                                        <option value="Dept02">HR</option>
+                                        <option value="Dept03">Marketing</option>
+                                        <option value="Dept04">IT</option>
+                                        <option value="Dept05">Finance</option>
                                     </Control.select>
                                 </Col>
                             </Row>

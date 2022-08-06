@@ -22,4 +22,19 @@ export const ConfigureStore = () => {
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk, logger)
     });
     return store;
-} 
+}
+
+
+// export const ConfigureStore = () => {
+//     const store = createStore(
+//         combineReducers({
+//             staffs: Staffs,
+//             departments: Departments,
+//             homeImage: HomeBackground,
+//             deptImages: DeptImages,
+//             staffsSalary: StaffsSalary,
+//         }),
+//         applyMiddleware(thunk, logger)
+//     );
+//     return store;
+// } 
