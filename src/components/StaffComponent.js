@@ -69,10 +69,10 @@ const StaffInfo = (props) => {
         const name = target.name;
         const value = target.value;
         if(name === 'doB') {
-            setDoB([name], value);;
+            setDoB(value);;
         }
         else if(name === 'startDate') {
-            setStartDate([name], value);
+            setStartDate(value);
         }
     };
 

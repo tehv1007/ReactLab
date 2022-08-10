@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {Card, CardBody, CardTitle, CardImg, InputGroup, Input, FormGroup, Form,
         Button, Label, Row, Col, Modal, ModalHeader, ModalBody} from 'reactstrap';
-import {LocalForm, Control, Errors} from 'react-redux-form';
+import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { FadeTransform } from 'react-animation-components';
 

@@ -19,7 +19,7 @@ export const postStaff = (name, doB, startDate, departmentId, salaryScale, annua
         annualLeave: annualLeave,
         overTime: overTime,
     }
-    newStaff.image = '/assets/images/newstaff.png';
+    newStaff.image = '/assets/images/alberto.png';
 
     return fetch(baseUrl + 'staffs', {
         method: 'POST',
@@ -104,6 +104,7 @@ export const staffDelete = (staffId) => (dispatch) => {
 
 export const staffInfoChange = (staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => (dispatch) => {
     const staffChanged = {
+        id: staffId,
         name: name,
         doB: dateFormat(doB, "dd/mm/yyyy"),
         startDate: dateFormat(startDate, "dd/mm/yyyy"),
@@ -112,10 +113,10 @@ export const staffInfoChange = (staffId, name, doB, startDate, departmentId, sal
         annualLeave: annualLeave,
         overTime: overTime,
     }
-    staffChanged.image = "/assets/images/newstaff.png"; 
+    staffChanged.image = "/assets/images/alberto.png"; 
     console.log('STAFF CHANGE ' + JSON.stringify(staffChanged));
         
-    return fetch(baseUrl + 'staffs/' + staffId, {
+    return fetch(baseUrl + 'staffs/', {
         method: "PATCH",
         body: JSON.stringify(staffChanged),
         headers: {
@@ -141,8 +142,9 @@ export const staffInfoChange = (staffId, name, doB, startDate, departmentId, sal
         })
         .then(response => response.json())
         .then(response => console.log('RESPONSE ' + response))
-        .then(() => dispatch(fetchStaffsSalary()))
-        .then(() => dispatch(fetchDepartments()))
+        // .then(() => dispatch(fetchStaffsSalary()))
+        // .then(() => dispatch(fetchDepartments()))
+        // .then(() => dispatch(fetchStaffs()))
         .catch(error => { console.log('CHANGE STAFF', error.message); alert('Your update is failed\nError: ' + error.message); });
         
 }

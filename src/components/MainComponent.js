@@ -23,7 +23,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    postStaff: (name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => dispatch(postStaff(name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)),
+    postStaff: (name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => 
+                dispatch(postStaff(name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)),
     fetchStaffs: () => {dispatch(fetchStaffs())},
     staffDelete: (staffId) => dispatch(staffDelete(staffId)),
     fetchDepartments: () => {dispatch(fetchDepartments())},
